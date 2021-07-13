@@ -10,12 +10,15 @@ const getAll = async () => {
   }
 }
 
-const getById = id => {
-  // DO YOUR MAGIC
+const getById = async id => {
+  const recs = await db('accounts').where('id', id).first()
+  return recs
 }
 
-const create = account => {
-  // DO YOUR MAGIC
+const create = async account => {
+  const [id] = await db('accounts').insert(account)
+  const newAcc = await getById(id)
+  return newAcc
 }
 
 const updateById = (id, account) => {
